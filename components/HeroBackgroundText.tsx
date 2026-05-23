@@ -142,13 +142,11 @@ export default function HeroBackgroundText() {
         // Size: larger near mouse
         p.size = BASE_PARTICLE_SIZE * (1 + easedFactor * 1.8)
 
-        // Alpha: darker (higher alpha) near mouse
-        // base alpha is fairly light (0.25), up to 0.95 near mouse
-        p.alpha = 0.22 + easedFactor * 0.75
+        // Alpha: half opacity static, near mouse deepens
+        p.alpha = 0.42 + easedFactor * 0.35
 
-        // Color: text-gray-200 equivalent (#e5e7eb)
-        // We modulate brightness slightly: near mouse = slightly darker (more contrast)
-        const brightness = 220 - easedFactor * 40 // 220 -> 180
+        // Color: lighter gray static, near mouse slightly darker
+        const brightness = 190 - easedFactor * 25 // 190 -> 165
         const color = `rgba(${brightness}, ${brightness}, ${brightness + 8}, ${p.alpha})`
 
         ctx.fillStyle = color

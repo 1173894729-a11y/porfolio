@@ -22,7 +22,7 @@ export default function Contact() {
     {
       icon: ExternalLink,
       label: '小红书',
-      value: '小红书主页',
+      value: '溜溜溜哒的小红书主页',
       href: profile.contact.xiaohongshu,
       external: true,
     },

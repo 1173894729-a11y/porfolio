@@ -1,8 +1,8 @@
 export const profile: Profile = {
-  name: '你的姓名',
+  name: '付尧尧/Yola',
   nameEn: 'FUYAOYAO',
-  title: '产品经理 / UX设计师',
-  subtitle: '专注于用户体验和产品创新',
+  title: 'AI产品经理/低空场景策划',
+  subtitle: '',
 
   about: {
     avatar: '/images/avatar.jpg',
@@ -363,7 +363,7 @@ export const profile: Profile = {
   contact: {
     email: '1173894729@qq.com',
     phone: '+86 13514250631',
-    xiaohongshu: 'https://xhslink.com/m/4sGnGTzZSfb',
+    xiaohongshu: 'https://www.xiaohongshu.com/user/profile/67dc0fff000000000d00906d',
     wechat: 'F_yyaoo',
     wechatQr: '/images/微信图片_20260515142920_74_15.jpg',
   },

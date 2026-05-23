@@ -1,10 +1,23 @@
 'use client'
 
+import { useRef } from 'react'
 import { motion } from 'framer-motion'
 import HeroBackgroundText from './HeroBackgroundText'
 import { profile } from '@/data/profile'
 
 export default function Hero() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const toggleVideo = () => {
+    const video = videoRef.current
+    if (!video) return
+    if (video.paused) {
+      video.play()
+    } else {
+      video.pause()
+    }
+  }
+
   const scrollToProjects = () => {
     const element = document.getElementById('projects')
     if (element) {
@@ -24,10 +37,8 @@ export default function Hero() {
       id="hero"
       className="relative min-h-screen flex items-center justify-center bg-gray-50"
     >
-      {/* Background Text - FUYAOYAO at bottom */}
       <HeroBackgroundText />
 
-      {/* Main Content Area - Video centered, text on right */}
       <div className="relative z-10 w-full max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex flex-col lg:flex-row items-center justify-center gap-8 lg:gap-12">
 
@@ -37,47 +48,30 @@ export default function Hero() {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8, delay: 0.2 }}
           >
-            <div className="relative w-[224px] h-[224px] sm:w-[256px] sm:h-[256px] lg:w-[304px] lg:h-[304px] rounded-full overflow-hidden bg-gray-200 shadow-xl">
-              {/* Placeholder for personal video */}
-              <div className="w-full h-full flex flex-col items-center justify-center text-gray-400">
-                <svg
-                  className="w-16 h-16 mb-4"
-                  fill="none"
-                  stroke="currentColor"
-                  viewBox="0 0 24 24"
-                >
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z"
-                  />
-                  <path
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth={1.5}
-                    d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z"
-                  />
-                </svg>
-                <span className="text-sm">个人视频</span>
-                <span className="text-xs mt-2 text-gray-300">请替换为实际视频</span>
-              </div>
-
-              {/* Uncomment below to use actual video */}
-              {/*
+            <button
+              onClick={toggleVideo}
+              className="relative w-[270px] h-[270px] sm:w-[308px] sm:h-[308px] lg:w-[365px] lg:h-[365px] rounded-full overflow-hidden bg-gray-200 shadow-xl cursor-pointer group block"
+            >
               <video
+                ref={videoRef}
                 className="w-full h-full object-cover"
-                controls
-                poster="/images/video-poster.jpg"
+                poster="/5月20日(4)-封面.jpg"
+                preload="none"
+                playsInline
               >
-                <source src="/videos/personal-intro.mp4" type="video/mp4" />
-                您的浏览器不支持视频标签。
+                <source src="/5月20日(4).mp4" type="video/mp4" />
               </video>
-              */}
-            </div>
+              {/* Hover overlay */}
+              <div className="absolute inset-0 flex items-center justify-center bg-black/30 opacity-0 group-hover:opacity-100 transition-opacity"
+              >
+                <span className="text-white text-sm font-medium tracking-wide">
+                  点击播放
+                </span>
+              </div>
+            </button>
           </motion.div>
 
-          {/* Right side - Text Content (smaller font) */}
+          {/* Right side - Text Content */}
           <motion.div
             className="text-center lg:text-left"
             initial={{ opacity: 0, x: 30 }}
@@ -92,9 +86,11 @@ export default function Hero() {
               {profile.title}
             </p>
 
-            <p className="text-sm text-gray-500 mb-6">
-              {profile.subtitle}
-            </p>
+            {profile.subtitle && (
+              <p className="text-sm text-gray-500 mb-6">
+                {profile.subtitle}
+              </p>
+            )}
 
             <div className="flex gap-4 justify-center lg:justify-start">
               <motion.button
